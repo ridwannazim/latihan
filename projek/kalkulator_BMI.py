@@ -48,6 +48,16 @@
 #     print("="*30)
 
 # HARI 15: Perbaikan Logika BMI & String Method
+def keluar():
+    while True:
+        pilihan = input("mau lanjut (y/n) =").strip().lower()
+        if pilihan == "n" :
+            print("Terima kasih sudah menggunakan aplikasi ini!")
+            return True
+        elif not pilihan in ["y","n"] :
+            print("mohon masukan sesaui perintah")
+            return False
+
 while True: # Program berjalan terus sampai disuruh berhenti
     print("\n" + "="*30)
     nama = input("Nama: ").strip() # Nama otomatis rapi (Andi Ganteng)
@@ -96,13 +106,5 @@ while True: # Program berjalan terus sampai disuruh berhenti
         
 
     print(f"Keterangan: {keterangan}")
-
-    pilihan = input("mau lanjut (y/n) =").strip().lower()
-    if pilihan == "n" :
-        print("Terima kasih sudah menggunakan aplikasi ini!")
+    if keluar():
         break
-    elif not pilihan in ["y","n"] :
-        print("mohon masukan sesaui perintah")
-        continue
-
-
