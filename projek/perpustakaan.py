@@ -48,10 +48,7 @@ while True:
             #elif input_judul in gudang_ and gudang_[input_judul] >= jumlah_pinjaman :
             gudang_[input_judul] -= jumlah_pinjaman
             waktu_sekarang = dt.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-            riwayat_pinjaman = {
-                "buku" : (input_judul),
-                "jumlah" : (jumlah_pinjaman),
-                "waktu pinjam" : (waktu_sekarang)}
+            riwayat_pinjaman = [input_judul,jumlah_pinjaman,waktu_sekarang]
             pinjam.append(riwayat_pinjaman)
             print("data berhasil disimpan. semangat membaca.")
     
@@ -75,7 +72,10 @@ while True:
                 continue
             elif pilihan == "1":
                 print("\nstok saat ini")
-                print(gudang_)
+                no=1
+                for judul,stok in gudang_.items():
+                    print(f"{no} {judul} \t:{stok}")
+                    no+=1
                 while True:
                     user = input("keluar (y/n) = ").lower().strip()
                     if user not in ["y","n"]:
@@ -91,10 +91,10 @@ while True:
                     print("TAMBAH BARANG".center(25,"="))
                     tambah_buku = input("judul buku = ").title()
                     jumlah_buku = input("masukan jumlah = ")
-                    gudang_[tambah_buku] = jumlah_buku
                     if not jumlah_buku.isnumeric():
                         print("error")
                         continue
+                    gudang_[tambah_buku] = int(jumlah_buku)
                     keluar = input("tambah barang lagi? (y/n) = ").lower().strip()
                     if keluar not in ["y","n"]:
                         print("error, ulangi")
@@ -107,7 +107,13 @@ while True:
                 break
 
     elif user == "3":
-        print(pinjam)
+        print("\n="*5,"history pinjawan","=\n"*5)
+        no = 1
+        for riwayat in pinjam:
+            print(f"{no}\tjudul \t: {riwayat_pinjaman[0]}")
+            print(f"\tjumlah \t: {riwayat_pinjaman[1]}")
+            print(f"\twaktu \t: {riwayat_pinjaman[2]}\n")
+            no+=1
         while True:
             keluar = input("keluar (y/n) = ").lower()
             if keluar not in ["y","n"]:
