@@ -743,3 +743,53 @@ data_dict ={
 print(data_dict['ai'])
 print(data_dict['ank'])
 print(data_dict['list'])
+
+'''HARI 29'''
+
+# operasi dictionary
+
+data_dict ={
+    'key':'value/nilai',
+    'ridwan':'lulus',
+    'fadil':'sekolah dasar'
+}
+ 
+# mengetahui panjang dictionary
+panjang = len(data_dict)
+print(f"panjang data adalah : {data_dict}")
+
+# mengecek key ada atau tidak
+key = 'fadil'
+cek_key = key in data_dict
+print(f"apakah {key} ada : {cek_key}")
+
+# mengakes value
+print(data_dict["ridwan"])
+print(data_dict.get("ridwan"))
+
+# yang membedakan dengan dan tanpa .get()
+# print(data_dict['ojan']) # hasilnya error karena tidak ditemukan
+# print(data_dict.get('ojan')) # hasilnya none karena tidak ada tapi program tetap berjalan
+
+# mengupdate atau merubah data
+data_dict['ridwan'] = 'mahasiswa' # jika key sudah ada dia akan mengubah value dengan yang baru
+print(data_dict)
+data_dict['budi'] = 'bekerja' # jika key tidak  ada otomatis menambahkan
+print(data_dict)
+
+data_dict.update({
+    'andi':'mahasiswa',
+    'jiko':'pelajar'
+    })
+print(data_dict)
+
+# yang membedakan dengan atau tanpa .update({})
+# tanpa .update({}) hanya bisa untuk satu data
+# sedangkan dengan .update({}) bisa banyak data seperti contoh diatas
+
+# mengahapus data
+del data_dict['jiko'] # menghapus tanpa meninggalkan valuenya
+print(data_dict)
+x = data_dict.pop("key")
+print(x)
+
