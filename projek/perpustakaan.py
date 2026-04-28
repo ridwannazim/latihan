@@ -5,8 +5,8 @@ import datetime as dt
 
 # daftar gudang
 gudang_={
-    'pkn':10,
-    'seni':8
+    'Pkn':10,
+    'Seni':8
 }
 # daftar pinjam
 pinjam = []
@@ -18,21 +18,21 @@ while True:
     print("PERPUSTAKAAN CENDIKIA".center(25,"="))
     print("="*25)
     print("\t1.pinjam buku \n\t2.cek gudang \n\t3.riwayat pinjaman \n\t4.keluar")
-    user = input("pilihanmu = ").strip()
-    if user not in ["1","2","3","4"]:
+    menu_utama = input("pilihanmu = ").strip()
+    if menu_utama not in ["1","2","3","4"]:
         print("pilihan tidak tersedia! mohon ulangi!")
         continue
 
-    elif user == "4":
+    elif menu_utama == "4":
         break
 
-    elif user == "1":
+    elif menu_utama == "1":
         while True:
             print("\n")
             print("PINJAM BUKU".center(25,"="))
             print("ketik (k) untuk keluar")
-            input_judul = input("judul buku = ").lower()
-            if input_judul == "k":
+            input_judul = input("judul buku = ").title()
+            if input_judul == "K":
                 break
             elif input_judul not in gudang_ :
                 print("maaf barang tidak tersedia")
@@ -52,41 +52,41 @@ while True:
             pinjam.append(riwayat_pinjaman)
             print("data berhasil disimpan. semangat membaca.")
     
-            user = input("pinjam lagi? (y/n) = ").lower().strip()
-            if user not in ["y","n"]:
+            pinjam_lagi = input("pinjam lagi? (y/n) = ").lower().strip()
+            if pinjam_lagi not in ["y","n"]:
                 print("maaf ulangi dengan benar")
                 continue
-            if user == "y":
+            if pinjam_lagi == "y":
                 continue
-            elif user == "n":
+            elif pinjam_lagi == "n":
                 break
                 
         
-    if user == "2":
+    elif menu_utama == "2":
         while True:
             print("\n")
             print("CEK GUDANG".center(25,"="))
-            pilihan = input("\t1.cek stok \n\t2.tambah barang \n\t3.keluar  \npilihan = ")
-            if pilihan not in ["1","2","3"]:
+            menu_cek_gudang = input("\t1.cek stok \n\t2.tambah barang \n\t3.keluar  \npilihan = ")
+            if menu_cek_gudang not in ["1","2","3"]:
                 print("maaf input salah, mohon ulangi")
                 continue
-            elif pilihan == "1":
+            elif menu_cek_gudang == "1":
                 print("\nstok saat ini")
                 no=1
                 for judul,stok in gudang_.items():
                     print(f"{no} {judul} \t:{stok}")
                     no+=1
                 while True:
-                    user = input("keluar (y/n) = ").lower().strip()
-                    if user not in ["y","n"]:
+                    keluar_stok = input("keluar (y/n) = ").lower().strip()
+                    if keluar_stok not in ["y","n"]:
                         print("maaf ualangi dengan benar")
                         continue
-                    if user == "n":
+                    if keluar_stok == "n":
                         continue
-                    elif user == "y":
+                    elif keluar_stok == "y":
                         break
                 
-            elif pilihan == "2":
+            elif menu_cek_gudang == "2":
                 while True:
                     print("TAMBAH BARANG".center(25,"="))
                     tambah_buku = input("judul buku = ").title()
@@ -94,32 +94,40 @@ while True:
                     if not jumlah_buku.isnumeric():
                         print("error")
                         continue
-                    gudang_[tambah_buku] = int(jumlah_buku)
-                    keluar = input("tambah barang lagi? (y/n) = ").lower().strip()
-                    if keluar not in ["y","n"]:
+                    jumlah_buku=int(jumlah_buku)
+                    if tambah_buku in gudang_:
+                        gudang_[tambah_buku] += jumlah_buku
+                    elif tambah_buku not in gudang_:
+                        gudang_[tambah_buku] = jumlah_buku
+                
+                    keluar_input_barang = input("tambah barang lagi? (y/n) = ").lower().strip()
+                    if keluar_input_barang not in ["y","n"]:
                         print("error, ulangi")
                         continue
-                    elif keluar == "n":
+                    elif keluar_input_barang == "n":
                         break
-                    elif keluar == "y":
+                    elif keluar_input_barang == "y":
                         continue
-            elif pilihan == "3":
+            elif menu_cek_gudang == "3":
                 break
 
-    elif user == "3":
-        print("="*5,"history pinjawan","="*5)
-        no = 1
-        for riwayat in pinjam:
-            print(f"{no}\tjudul \t: {riwayat[0]}")
-            print(f"\tjumlah \t: {riwayat[1]}")
-            print(f"\twaktu \t: {riwayat[2]}\n")
-            no+=1
+    elif menu_utama == "3":
+        print("="*5,"history pinjaman","="*5)
+        if not pinjam :
+            print("belum ada pinjaman")
+        elif pinjam:
+            no = 1
+            for riwayat in pinjam:
+                print(f"{no}\tjudul \t: {riwayat[0]}")
+                print(f"\tjumlah \t: {riwayat[1]}")
+                print(f"\twaktu \t: {riwayat[2]}\n")
+                no+=1
         while True:
-            keluar = input("keluar (y/n) = ").lower()
-            if keluar not in ["y","n"]:
+            keluar_histori = input("keluar (y/n) = ").lower()
+            if keluar_histori not in ["y","n"]:
                 print("error, ulangi")
                 continue
-            elif keluar == "y":
+            elif keluar_histori == "y":
                 break
-            elif keluar == "n":
+            elif keluar_histori == "n":
                 continue
