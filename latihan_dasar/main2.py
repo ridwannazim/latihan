@@ -790,6 +790,98 @@ print(data_dict)
 # mengahapus data
 del data_dict['jiko'] # menghapus tanpa meninggalkan valuenya
 print(data_dict)
-x = data_dict.pop("key")
+x = data_dict.pop("key") # menghapus dari dictionary menaruh value ke variabel x jadi bisa dipanggil  kembali
 print(x)
 
+'''HARI 30'''
+
+# Looping Dictionary
+
+data = {
+    "awan":"pelajar",
+    "imron":"bekerja",
+    "ilham":"pelajar",
+    "aldi":"mahasiswa",
+    "oki":"pelajar"
+}
+
+# looping biasa
+for nama in data:
+    print(nama) # hanya akan menampilkan key nya saja
+
+# operator untuk mengambil
+## untuk mengambil key nya saja
+print(data)
+keys = data.keys()
+print(keys)
+
+for kunci in data.keys():
+    print(kunci)
+    # atau
+    print(data.get(kunci)) # value akan diambil  karena kunnci berisi key yang artinya ini disuruh menampilkan value nya
+
+## untuk mengambil value
+nilai = data.values()
+print(nilai)
+
+for isi in data.values():
+    print(isi)
+
+## mengambil keduanya
+key_value = data.items()
+print(key_value)
+
+for item in data.items():
+    print(item)
+
+for key,value in data.items():
+    print(f"key = {key} | value = {value}") # akan pisah tidak  jadi satu seperti yang diatas
+
+
+'''CONTOH'''
+data_umur = {
+    "suroso": "65",
+    "ijah":"70",
+    "roso":"45",
+    "pakem":"60"
+}
+
+for nama,umur in data_umur.items():
+    print(f"nama : {nama}")
+    print(f"umur : {umur}\n")
+
+
+# copy dictionary
+
+data_umur = {
+    "suroso": "65",
+    "ijah":"70",
+    "roso":"45",
+    "pakem":"60"
+}
+
+data = data_umur.copy() # akan membuat dict baru
+
+print(f"data umur = {data_umur}\n")
+print(f"data = {data}\n")
+
+data_umur["roso"] = "40"
+print(f"data umur = {data_umur}\n")
+print(f"data = {data}\n")
+
+data.update({
+    "sukiman":"43",
+    "rido":"19"
+})
+print(f"data umur = {data_umur}\n")
+print(f"data = {data}\n")
+
+# pop dictionary
+umur = data_umur.pop("suroso") # # menghapus dari dictionary menaruh value ke variabel umur jadi bisa dipanggil  kembali
+print(f"suroso = {umur}\n")
+print(f"data umur = {data_umur}\n")
+
+# popitem dictioary
+data_terakhir = data_umur.popitem()
+print(f"data terakhir = {data_terakhir}\n")
+print(f"data umur = {data_umur}\n")
