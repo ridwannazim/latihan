@@ -107,12 +107,12 @@ while True:
                 break
 
     elif user == "3":
-        print("\n="*5,"history pinjawan","=\n"*5)
+        print("="*5,"history pinjawan","="*5)
         no = 1
         for riwayat in pinjam:
-            print(f"{no}\tjudul \t: {riwayat_pinjaman[0]}")
-            print(f"\tjumlah \t: {riwayat_pinjaman[1]}")
-            print(f"\twaktu \t: {riwayat_pinjaman[2]}\n")
+            print(f"{no}\tjudul \t: {riwayat[0]}")
+            print(f"\tjumlah \t: {riwayat[1]}")
+            print(f"\twaktu \t: {riwayat[2]}\n")
             no+=1
         while True:
             keluar = input("keluar (y/n) = ").lower()
