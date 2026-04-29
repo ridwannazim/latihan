@@ -1,15 +1,23 @@
-# HARI 22
-# kembali setalah hampir 2 minggu 
-
+ 
 import datetime as dt
 
 # daftar gudang
 gudang_={
-    'Pkn':10,
-    'Seni':8
+    'Mata Pelajaran':{
+        'Pkn':10,
+        'Seni':8
+    },
+    'Novel':{
+        'Sisa Kata':8,
+        'Ujung Doa':12
+    },
+    'Dongeng':{
+        'Si Kancil':8,
+        'Roro Jonggrang':5
+    }
 }
 # daftar pinjam
-pinjam = []
+pinjam = {}
 
 # awal program
 while True:
@@ -31,25 +39,36 @@ while True:
             print("\n")
             print("PINJAM BUKU".center(25,"="))
             print("ketik (k) untuk keluar")
-            input_judul = input("judul buku = ").title()
-            if input_judul == "K":
+            input_kategori = input(f"{"kategori buku":<15}= ").title()
+            if input_kategori == "K":
                 break
-            elif input_judul not in gudang_ :
+            elif input_kategori not in gudang_:
+                print("maaf kategori tidak ditemukan")
+                continue
+            input_judul = input(f"{"judul buku":<15}= ").title()
+            if input_judul not in gudang_[input_kategori] :
                 print("maaf barang tidak tersedia")
                 continue
-            jumlah_pinjaman = input("jumlah \t= ")
+            jumlah_pinjaman = input(f"{"jumlah":<15}= ")
             if not jumlah_pinjaman.isnumeric():
                 print("silakan isi dengan benar")
                 continue
             jumlah_pinjaman = int(jumlah_pinjaman)
-            if jumlah_pinjaman > gudang_[input_judul]:
-                print(f"maaf jumlah stok tidak memadai. stok saat ini = {gudang_[input_judul]} ")
+            if jumlah_pinjaman > gudang_[input_kategori][input_judul]:
+                print(f"maaf jumlah stok tidak memadai. stok saat ini = {gudang_[input_kategori][input_judul]} ")
                 continue   
             #elif input_judul in gudang_ and gudang_[input_judul] >= jumlah_pinjaman :
-            gudang_[input_judul] -= jumlah_pinjaman
+            gudang_[input_kategori][input_judul] -= jumlah_pinjaman
             waktu_sekarang = dt.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-            riwayat_pinjaman = [input_judul,jumlah_pinjaman,waktu_sekarang]
-            pinjam.append(riwayat_pinjaman)
+            riwayat_pinjaman = {
+                'judul':input_judul,
+                'jumlah':jumlah_pinjaman,
+                'waktu':waktu_sekarang
+                }
+            if input_kategori not in pinjam:
+                pinjam[input_kategori] = [riwayat_pinjaman]
+            elif input_kategori in pinjam :
+                pinjam[input_kategori].append(riwayat_pinjaman)
             print("data berhasil disimpan. semangat membaca.")
     
             pinjam_lagi = input("pinjam lagi? (y/n) = ").lower().strip()
@@ -73,9 +92,13 @@ while True:
             elif menu_cek_gudang == "1":
                 print("\nstok saat ini")
                 no=1
-                for judul,stok in gudang_.items():
-                    print(f"{no} {judul} \t:{stok}")
+                for kategori,isi in gudang_.items():
+                    print(f"{no}. kategori = {kategori.upper()}")
                     no+=1
+                    nosub=1     
+                    for judul,stok in isi.items():
+                        print(f"  {nosub}. judul \t= {judul:20} stok = {stok}")
+                        nosub+=1
                 while True:
                     keluar_stok = input("keluar (y/n) = ").lower().strip()
                     if keluar_stok not in ["y","n"]:
@@ -89,17 +112,20 @@ while True:
             elif menu_cek_gudang == "2":
                 while True:
                     print("TAMBAH BARANG".center(25,"="))
-                    tambah_buku = input("judul buku = ").title()
-                    jumlah_buku = input("masukan jumlah = ")
+                    tambah_kategori = input(f"{"kategori":<15}= ").title()
+                    tambah_buku = input(f"{"judul buku":<15}= ").title()
+                    jumlah_buku = input(f"{"masukan jumlah":<15}= ")
                     if not jumlah_buku.isnumeric():
                         print("error")
                         continue
                     jumlah_buku=int(jumlah_buku)
-                    if tambah_buku in gudang_:
-                        gudang_[tambah_buku] += jumlah_buku
-                    elif tambah_buku not in gudang_:
-                        gudang_[tambah_buku] = jumlah_buku
-                
+                    if tambah_kategori in gudang_ and tambah_buku in gudang_[tambah_kategori]:
+                        gudang_[tambah_kategori][tambah_buku] += jumlah_buku
+                    elif tambah_kategori in gudang_ and not tambah_buku in gudang_[tambah_kategori]:
+                       gudang_[tambah_kategori][tambah_buku] = jumlah_buku
+                    elif tambah_kategori not in gudang_:
+                        gudang_[tambah_kategori] = {}
+                        gudang_[tambah_kategori][tambah_buku] = jumlah_buku
                     keluar_input_barang = input("tambah barang lagi? (y/n) = ").lower().strip()
                     if keluar_input_barang not in ["y","n"]:
                         print("error, ulangi")
@@ -116,12 +142,22 @@ while True:
         if not pinjam :
             print("belum ada pinjaman")
         elif pinjam:
-            no = 1
-            for riwayat in pinjam:
-                print(f"{no}\tjudul \t: {riwayat[0]}")
-                print(f"\tjumlah \t: {riwayat[1]}")
-                print(f"\twaktu \t: {riwayat[2]}\n")
-                no+=1
+            no=1
+            for kategori,isi in pinjam.items():
+                    print(f"{no}. kategori = {kategori.upper()}")
+                    no+=1
+                    nosub=1     
+                    for riwayat in isi:
+                        print(f"  {nosub}. judul = {riwayat['judul']:<20} jumlah = {riwayat['jumlah']:<5} waktu peminjaman = {riwayat['waktu']}")
+                        nosub+=1
+            #print(pinjam)
+            # no = 1
+            # for riwayat in pinjam:
+            #     print(f"{no}\tjudul \t: {riwayat[0]}")
+            #     print(f"\tjumlah \t: {riwayat[1]}")
+            #     print(f"\twaktu \t: {riwayat[2]}\n")
+            #     print(f"\twaktu \t: {riwayat[3]}\n")
+            #     no+=1
         while True:
             keluar_histori = input("keluar (y/n) = ").lower()
             if keluar_histori not in ["y","n"]:
