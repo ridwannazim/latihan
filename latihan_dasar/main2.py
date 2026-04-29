@@ -885,3 +885,45 @@ print(f"data umur = {data_umur}\n")
 data_terakhir = data_umur.popitem()
 print(f"data terakhir = {data_terakhir}\n")
 print(f"data umur = {data_umur}\n")
+
+'''hari 30'''
+
+# Multi keys & Nesting Dictionary
+
+buku1 = {
+    'judul':'indah pada waktunya',
+    'penulis':'ilham',
+    'penerbit':'lentera',
+    'tahun terbit':'2020'
+}
+buku2 = {
+    'judul':'awal mula',
+    'penulis':'naim',
+    'penerbit':'bahtera',
+    'tahun terbit':'2023'
+}
+buku3 = {
+    'judul':'terpisah jarak',
+    'penulis':'sisil',
+    'penerbit':'cahya',
+    'tahun terbit':'2024'
+}
+
+data_buku = {
+    '001':buku1,
+    '002':buku2,
+    '003':buku3
+}
+
+print(f"{'NO':<4}| {'judul':<25}| {'PENULIS':<10}| {'PENERBIT':<10}| {'TAHUN TERBIT':<5} ")
+print("="*70)
+
+for nomor in data_buku:
+    no = nomor
+    
+    judul = data_buku[no]['judul']
+    penulis = data_buku[no]['penulis']
+    penerbit = data_buku[no]['penerbit']
+    tahun_terbit = data_buku[no]['tahun terbit']
+
+    print(f"{no:<4}| {judul:<25}| {penulis:<10}| {penerbit:<10}| {tahun_terbit:<5} ")
