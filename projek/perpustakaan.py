@@ -150,14 +150,7 @@ while True:
                     for riwayat in isi:
                         print(f"  {nosub}. judul = {riwayat['judul']:<20} jumlah = {riwayat['jumlah']:<5} waktu peminjaman = {riwayat['waktu']}")
                         nosub+=1
-            #print(pinjam)
-            # no = 1
-            # for riwayat in pinjam:
-            #     print(f"{no}\tjudul \t: {riwayat[0]}")
-            #     print(f"\tjumlah \t: {riwayat[1]}")
-            #     print(f"\twaktu \t: {riwayat[2]}\n")
-            #     print(f"\twaktu \t: {riwayat[3]}\n")
-            #     no+=1
+            
         while True:
             keluar_histori = input("keluar (y/n) = ").lower()
             if keluar_histori not in ["y","n"]:
