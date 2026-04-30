@@ -927,3 +927,31 @@ for nomor in data_buku:
     tahun_terbit = data_buku[no]['tahun terbit']
 
     print(f"{no:<4}| {judul:<25}| {penulis:<10}| {penerbit:<10}| {tahun_terbit:<5} ")
+
+
+'''HARI 31'''
+
+# latihan dictionary part 1
+
+import os
+
+template_data = {
+    'nama':'nama',
+    'umur':00,
+    'tempat lahir':'tempat lahir',
+}
+
+data_diri = {} # nanti akan menjadi pusat data
+
+os.system("cls")
+print("-"*20)
+print(f"{'ISI DATA DIRI':^20}")
+print("-"*20)
+
+
+data = dict.fromkeys(template_data.keys())
+data['nama'] = input(f"{'NAMA':<13}= ")
+data['umur'] = int(input(f"{'UMUR':<13}= "))
+data['tempat lahir'] = input(f"{'TEMPAT LAHIR':<13}= ")
+print(data) # data merupakan variabel sementara sebelum nantinya dimasukan ke data_diri
+
