@@ -955,3 +955,46 @@ data['umur'] = int(input(f"{'UMUR':<13}= "))
 data['tempat lahir'] = input(f"{'TEMPAT LAHIR':<13}= ")
 print(data) # data merupakan variabel sementara sebelum nantinya dimasukan ke data_diri
 
+'''HARI 32'''
+
+# latihan dictionary  part 2
+import os
+
+template_data = {
+    'nama':'nama',
+    'umur':00,
+    'tempat lahir':'tempat lahir',
+}
+
+data_diri = {} # nanti akan menjadi pusat data
+
+while True:
+    os.system("cls")
+    print("-"*20)
+    print(f"{'ISI DATA DIRI':^20}")
+    print("-"*20)
+
+
+    data = dict.fromkeys(template_data.keys())
+    data['nama'] = input(f"{'NAMA':<13}= ")
+    data['umur'] = int(input(f"{'UMUR':<13}= "))
+    data['tempat lahir'] = input(f"{'TEMPAT LAHIR':<13}= ")
+    
+    # KEY = ''.join((random.choice(string.ascii_uppercase) for i in range(6)))
+    key = (f"{len(data_diri)+1:03}")
+    data_diri.update({key:data})
+    print(f"{'KEY':<5} | {"NAMA":<10} | {'UMUR':<5} | {'TEMPAT LAHIR':<20}")
+    print("-"*40)
+    for data in data_diri:
+        key = data
+
+        nama = data_diri[key]['nama']
+        umur = data_diri[key]['umur']
+        tempat = data_diri[key]['tempat lahir']
+
+        print(f"{key:<5} | {nama:<10} | {umur:<5} | {tempat:<20}")    
+    
+    print("\n")
+    selesai = input("tambah data lagi? (y/n) =")
+    if selesai == "n":
+        break
