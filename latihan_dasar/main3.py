@@ -130,3 +130,8 @@ def tambah(input1=2,input2=3,input3=4,input4=5):
 print(tambah())
 print(tambah(input1=5))
 print(tambah(input3=1,input2=1))
+
+
+'''hari 34'''
+
+# latihan fungsi menggunakan program kalkulator bmi(projek->kalkulator_BMI.py)
