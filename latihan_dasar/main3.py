@@ -135,3 +135,40 @@ print(tambah(input3=1,input2=1))
 '''hari 34'''
 
 # latihan fungsi menggunakan program kalkulator bmi(projek->kalkulator_BMI.py)
+
+'''hari 35'''
+
+# type hints untul fungsi
+
+# bentuk standar fungsi yang kita pelajari
+'''
+def sapa(nama,pesan):
+    print(f"{nama},{pesan}.")
+
+sapa("ucup","selamat pagi")
+
+def hitung(a,b):
+    hasil = a * b
+    print(hasil)
+
+hitung(3,4)
+hitung(4,4)
+'''
+
+# penggunaan type hints
+                                        # -> float artinya output yang dihasilkan akan dirubah ke float
+def tambah(angka,angka2:float) -> float:# :float merupakan type nya jadi akan membatasi pada type tersebut saja
+    hasil = angka + angka2
+    return hasil
+
+total = tambah(3.4,5.4)
+print(total)
+total = tambah(4,5)
+print(total)
+
+import string
+def display(argument:string):
+    print(argument)
+
+display("ucup")
+display(88)
