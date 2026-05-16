@@ -172,3 +172,42 @@ def display(argument:string):
 
 display("ucup")
 display(88)
+
+
+'''hari 36'''
+
+# *args pada fungsi
+
+# fungsi biasa 
+def data(nama,tinggi,berat):
+    print(f"{nama}, tinggi : {tinggi}, berat : {berat}")
+
+data("ridwan",181,64)
+
+def data_list(list_):
+    data = list_.copy()
+    nama = data[0]
+    tinggi = data[1]
+    berat = data[2]
+
+    print(f"{nama}, tinggi : {tinggi}, berat : {berat}")
+
+data_list(['tito',177,70])
+
+# menggunakan *args
+def sapa(*sapa):
+    print(f"nama : {sapa[0]}, tinggi : {sapa[1]}, berat : {sapa[2]}")
+
+sapa("otong",167,65)
+
+# studi kasus
+
+def tambah(*tambah):
+    hasil = 0
+    for angka in tambah:
+        hasil += angka
+    
+    return hasil
+
+jumlah = tambah(1,2,4,4,5,4)
+print(jumlah)
