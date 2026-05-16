@@ -65,7 +65,7 @@ while True:
 
     # Menggunakan 'in' agar lebih efisien
     if gender in ["pria", "lakilaki", "cowok"]:
-       keterangan = kategori_l(bmi)
+        keterangan = kategori_l(bmi)
         
     elif gender in ["wanita", "perempuan", "cewek"]:
         keterangan = kategori_p(bmi)
