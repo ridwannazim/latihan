@@ -1,4 +1,3 @@
- 
 import datetime as dt
 import os
 import time
@@ -43,30 +42,73 @@ def tanya(pesan):
         else:
             print("input salah!!") 
         
-def tampilan_riwayat_pinjaman():
-    no=1
-    for kategori,isi in pinjam.items():
-            print(f"{no}. kategori = {kategori.upper()}")
-            no+=1
-            nosub=1     
-            for riwayat in isi:
-                print(f"  {nosub}. judul = {riwayat['judul']:<20} jumlah = {riwayat['jumlah']:<5} waktu peminjaman = {riwayat['waktu']}")
-                nosub+=1
-def history():
-    '''fitur menu riwayat pinjaman'''
+'''fitur 1 pinjam buku'''
+def input_user_pinjam():
+    '''input pinjaman'''
+    while True:
+        print("\nketik (k) untuk keluar")
+        kategori = input(f"  {'kategori buku':<15}= ").title()
+        if kategori == "K":
+            return None
+        elif kategori not in gudang_:
+            print("maaf kategori tidak ditemukan")
+            time.sleep(1)
+            continue
+        judul= input(f"  {'judul buku':<15}= ").title()
+        if judul not in gudang_[kategori] :
+            print("maaf barang tidak tersedia")
+            time.sleep(1)
+            continue
+        jumlah_pinjaman = input(f"  {'jumlah':<15}= ")
+        if not jumlah_pinjaman.isnumeric():
+            print("silakan isi dengan benar")
+            time.sleep(1)
+            continue
+        jumlah_pinjaman = int(jumlah_pinjaman)  
+        if jumlah_pinjaman > gudang_[kategori][judul]:
+            print(f"maaf jumlah stok tidak memadai. stok saat ini = {gudang_[kategori][judul]} ")
+            time.sleep(1)
+            continue   
+        return kategori,judul,jumlah_pinjaman
+
+def proses_data_pinjaman(kategori,judul,jumlah):
+    '''proses pengolahan data pinjaman'''
+    gudang_[kategori][judul] -= jumlah
+    waktu_sekarang = dt.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+    riwayat_pinjaman = {
+        'judul':judul,
+        'jumlah':jumlah,
+        'waktu':waktu_sekarang
+        }
+    
+    return riwayat_pinjaman
+
+def menyimpan_riwayat(kategori,riwayat):
+    '''data riwayat pinjam'''
+    if kategori not in pinjam:
+        pinjam[kategori] = [riwayat]
+    else :
+        pinjam[kategori].append(riwayat)
+
+def pinjam_buku():
+    '''fitur menu pinjam buku'''
     while True:
         os.system("cls")
-        header_fitur("HISTORY PINJAMAN")
-        if not pinjam :
-            print("belum ada pinjaman")
-        elif pinjam:
-            print("="*87)
-            tampilan_riwayat_pinjaman()
-            print("="*87)
-        if not tanya("lihat lagi?"):
+        header_fitur("PINJAM BUKU")
+        hasil = input_user_pinjam()
+        if hasil is None:
+            break
+        kategori,judul,jumlah_pinjam = hasil 
+        data_pinjam_sementara = proses_data_pinjaman(kategori,judul,jumlah_pinjam)
+        menyimpan_riwayat(kategori,data_pinjam_sementara)
+        print("\ndata berhasil disimpan. semangat membaca.")
+        print("="*25)
+        if not tanya("pinjam lagi?"):
             break
 
+'''fitur 2 cek gudang'''
 def proses_tambah_barang(kategori,buku,jumlah):
+    '''menambahkan barang ke gudang'''
     if kategori in gudang_ and buku in gudang_[kategori]:
         gudang_[kategori][buku] += jumlah
     elif kategori in gudang_ and not buku in gudang_[kategori]:
@@ -93,7 +135,8 @@ def tambah_barang():
         if not tanya("\ntambah lagi?"):
             break
 
-def tampilan_stok_gudang():
+def stok_gudang():
+    '''menampilkan stok gudang'''
     no=1
     for kategori,isi in gudang_.items():
         print(f"{no}. kategori = {kategori.upper()}")
@@ -104,11 +147,11 @@ def tampilan_stok_gudang():
             nosub+=1
 
 def cek_stok():
-    '''fitur sub menu tambah barang'''
+    '''fitur sub menu cek stok'''
     while True:
         os.system("cls")
         header_fitur("STOK SAAT INI")
-        tampilan_stok_gudang()
+        stok_gudang()
         print("="*25)
         if tanya("keluar?"):
             break
@@ -129,84 +172,52 @@ def cek_gudang():
             tambah_barang()
         elif menu_cek_gudang == "3":
             break
+        
+'''fitur 3 riwayat pinjaman'''
+def menampilkan_riwayat_pinjaman():
+    '''menampilkan data pinjaman'''
+    no=1
+    for kategori,isi in pinjam.items():
+            print(f"{no}. kategori = {kategori.upper()}")
+            no+=1
+            nosub=1     
+            for riwayat in isi:
+                print(f"  {nosub}. judul = {riwayat['judul']:<20} jumlah = {riwayat['jumlah']:<5} waktu peminjaman = {riwayat['waktu']}")
+                nosub+=1
 
-def input_user_pinjam():
-    while True:
-        print("\nketik (k) untuk keluar")
-        input_kategori = input(f"  {'kategori buku':<15}= ").title()
-        if input_kategori == "K":
-            return None
-        elif input_kategori not in gudang_:
-            print("maaf kategori tidak ditemukan")
-            time.sleep(1)
-            continue
-        input_judul= input(f"  {'judul buku':<15}= ").title()
-        if input_judul not in gudang_[input_kategori] :
-            print("maaf barang tidak tersedia")
-            time.sleep(1)
-            continue
-        jumlah_pinjaman = input(f"  {'jumlah':<15}= ")
-        if not jumlah_pinjaman.isnumeric():
-            print("silakan isi dengan benar")
-            time.sleep(1)
-            continue
-        jumlah_pinjaman = int(jumlah_pinjaman)  
-        if jumlah_pinjaman > gudang_[input_kategori][input_judul]:
-            print(f"maaf jumlah stok tidak memadai. stok saat ini = {gudang_[input_kategori][input_judul]} ")
-            time.sleep(1)
-            continue   
-        return input_kategori,input_judul,jumlah_pinjaman
-
-def proses_tampilan_data_pinjam(kategori,judul,jumlah):
-    gudang_[kategori][judul] -= jumlah
-    waktu_sekarang = dt.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-    riwayat_pinjaman = {
-        'judul':judul,
-        'jumlah':jumlah,
-        'waktu':waktu_sekarang
-        }
-    
-    return riwayat_pinjaman
-
-def pengecekan_data_buku_pinjam(kategori,riwayat):
-    if kategori not in pinjam:
-        pinjam[kategori] = [riwayat]
-    elif kategori in pinjam :
-        pinjam[kategori].append(riwayat)
-
-def pinjam_buku():
-    '''fitur menu pinjam buku'''
+def riwayat_pinjaman():
+    '''fitur menu riwayat pinjaman'''
     while True:
         os.system("cls")
-        header_fitur("PINJAM BUKU")
-        hasil = input_user_pinjam()
-        if hasil is None:
+        header_fitur("HISTORY PINJAMAN")
+        if not pinjam :
+            print("belum ada pinjaman")
+        elif pinjam:
+            print("="*87)
+            menampilkan_riwayat_pinjaman()
+            print("="*87)
+        if not tanya("lihat lagi?"):
             break
-        kategori,judul,jumlah_pinjam = hasil 
-        data_pinjam_sementara = proses_tampilan_data_pinjam(kategori,judul,jumlah_pinjam)
-        pengecekan_data_buku_pinjam(kategori,data_pinjam_sementara)
-        print("\ndata berhasil disimpan. semangat membaca.")
-        print("="*25)
-        if not tanya("pinjam lagi?"):
+        
+
+
+def main():
+    while True:
+        os.system("cls")
+        header()
+        menu_utama = input("pilihanmu = ").strip()
+        if menu_utama not in ["1","2","3","4"]:
+            print("pilihan tidak tersedia! mohon ulangi!")
+            time.sleep(1)
+            continue
+
+        if menu_utama == "4":
             break
+        elif menu_utama == "1":
+            pinjam_buku() 
+        elif menu_utama == "2":
+            cek_gudang()
+        elif menu_utama == "3":
+            riwayat_pinjaman()
 
-
-# awal program
-while True:
-    os.system("cls")
-    header()
-    menu_utama = input("pilihanmu = ").strip()
-    if menu_utama not in ["1","2","3","4"]:
-        print("pilihan tidak tersedia! mohon ulangi!")
-        time.sleep(1)
-        continue
-
-    elif menu_utama == "4":
-        break
-    elif menu_utama == "1":
-        pinjam_buku() 
-    elif menu_utama == "2":
-        cek_gudang()
-    elif menu_utama == "3":
-        history()
-# akhir program
+main()
