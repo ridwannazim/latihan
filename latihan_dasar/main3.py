@@ -211,3 +211,59 @@ def tambah(*tambah):
 
 jumlah = tambah(1,2,4,4,5,4)
 print(jumlah)
+
+
+'''HARI 37'''
+
+# **kwargs pada fungsi
+
+# contoh fungsi biasa
+
+def alamat(nama,desa,rt,rw):
+    '''fungsi biasa'''
+    print(f"nama = {nama}")
+    print(f"desa = {desa} RT = {rt} RW = {rw}")
+
+alamat("rudi","panggung","04","02")
+
+# menggunakan **kwargs
+def alamat(**alamat):
+    '''fungsi **kwargs'''
+    nama = alamat['nama']
+    desa = alamat['desa']
+    rt = alamat['rt']
+    rw = alamat['rw']
+    print(f"nama = {nama}")
+    print(f"desa = {desa} RT = {rt} RW = {rw}")
+
+alamat(nama="ardi",desa="maospati",rt="03",rw="02")
+
+# studi kasus
+
+def perhitungan(*angka,**operasi):
+    '''fungsi hitung'''
+    hasil = angka[1]
+    if operasi['hitung'] == "tambah":
+        for number in angka :
+            hasil += number
+
+    elif operasi['hitung'] == "kurang":
+        for number in angka :
+            hasil -= number
+
+    elif operasi['hitung'] == "kali":
+        #hasil = 1
+        for number in angka :
+            hasil *= number
+
+    else:
+        print("jenis operasi tidak ditemukan")
+
+    return hasil
+
+hasil = perhitungan(1,3,4,2,hitung="tambah")
+print(hasil)
+hasil = perhitungan(1,3,4,2,hitung="kurang")
+print(hasil)
+hasil = perhitungan(1,3,4,2,hitung="kali")
+print(hasil)
