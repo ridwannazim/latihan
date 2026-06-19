@@ -267,3 +267,128 @@ hasil = perhitungan(1,3,4,2,hitung="kurang")
 print(hasil)
 hasil = perhitungan(1,3,4,2,hitung="kali")
 print(hasil)
+
+'''HARI 38'''
+
+# filter 
+# ini experimen dan hasi dibawah hasil buat dan debug sendiri
+data = {
+    '001':{
+        'nama':'rudi',
+        'umur':13
+        },
+    '002':{
+        'nama':'parman',
+        'umur':45
+        },
+    '003':{
+        'nama':'rahma',
+        'umur':20
+        },
+    '004':{
+        'nama':'ucup',
+        'umur':9
+        },
+    '005':{
+        'nama':'tono',
+        'umur':15
+        },
+}
+
+def cek_umur(data):
+    return data[1]['umur'] <17    
+    
+    
+dibawah_17tahun = list(filter(cek_umur,data.items()))
+no=1
+for orang in dibawah_17tahun:
+        print(f"{no} nama = {orang[1]['nama']:^10} | umur = {orang[1]['umur']:^5}")
+        no+=1
+        
+
+'''HARI 39'''
+
+# lambda funtion
+
+# fungsi biasa 
+def kuadrat(angka):
+    return angka**2
+
+print(f"hasil dari 5 kuadrat = {kuadrat(5)}")
+
+# menggunakan lambda
+# output = lambda argument : expression
+
+kuadrat = lambda angka : angka ** 2
+print(f"hasil dari 3 kuadrat = {kuadrat(3)}")
+
+pangkat =  lambda angka,pangkat : angka**pangkat
+print(f"hasil dari 5 dipangkatkan 3 = {pangkat(5,3)}")
+
+bagi =  lambda angka,pembagi : angka / pembagi
+print(f"hasil dari 21 dibagi 3 = {bagi(21,3)}")
+
+# lambda berguna untuk mem filter
+# contoh sederhana
+
+nama = ["arman","ujang","kampret","sarimin"]
+
+nama.sort()
+print(f"data nama short = {nama}")
+
+def panjang_nama(nama):
+    return len(nama)
+
+nama.sort(key=panjang_nama)
+print(F"sort berdasar kan pannjang nama = {nama}")
+
+# menggunakan lambda
+nama = ["arman","ujang","kampret","sarimin"]
+nama.sort(key=lambda nama:len(nama))
+print(f"sort menggunakan lambda = {nama}")
+
+# filter 
+data_angka = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+
+def lebih_dari_10(angka):
+    return angka>10
+
+data_angka_baru = list(filter(lebih_dari_10,data_angka))
+print(f"angka lebih dari 10 = {data_angka_baru}")
+#menggunkan lambda
+data_angka_baru = list(filter(lambda x:x<10,data_angka))
+print(f"angka kurang dari 10 = {data_angka_baru}")
+
+# genap
+print(f"angka genap = {list(filter(lambda x:x%2==0,data_angka))}")
+# ganjil
+print(f"angka ganjil = {list(filter(lambda x:x%2!=0,data_angka))}")
+# keliapat 5
+print(f"angka kelipatan 5 = {list(filter(lambda x:x%5==0,data_angka))}")
+# angka 4 > 10 (lebih dari 4 kurang dari 10)
+print(f"angka lebih dari 4 kurang dari 10  = {list(filter(lambda x:x>4 and x<10 ,data_angka))}")
+print(f"angka lebih dari 4 kurang dari 10  = {list(filter(lambda x:4 < x <10 ,data_angka))}")
+
+
+# anonymous function
+# currying <- haskell curry
+
+def pangkat(angka,n):
+    hasil = angka**n
+    return hasil
+
+print(f"hasil dari 3 dipangkatkan 3 = {pangkat(3,3)}")
+
+def pangkat(n):
+    return lambda angka : angka ** n
+
+pangkat7 = pangkat(7)
+print(f"hasil dari 3 dipangkatkan 7 = {pangkat7(3)}")
+pangkat2 = pangkat(2)
+print(f"hasil dari 3 dipangkatkan 2 = {pangkat2(3)}")
+
+print(f"hasil dari 2 dipangkatkan 2 = {pangkat(2)(2)}")
+
+
+
+
