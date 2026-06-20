@@ -390,5 +390,74 @@ print(f"hasil dari 3 dipangkatkan 2 = {pangkat2(3)}")
 print(f"hasil dari 2 dipangkatkan 2 = {pangkat(2)(2)}")
 
 
+'''HARI 40'''
+
+# global dan local scope
+
+nama_global = "nazim"  # <-- ini merupakan variabel global
+
+# mengakses variabel global menggunakan fungsi
+def sapa():
+    print(f"Halo {nama_global}")
+
+sapa()
+
+# mengakses variabel global menggunakan for
+for i in range(1,6):
+    print(f"{i}. Halo {nama_global}")
+
+# mengakses variabel global menggunakan if
+if True:
+    print(f"Halo {nama_global}")
+
+## variabel local atau local scope
+
+def fungsi():
+    nama_local = "ucup"  # <-- ini merupakan variabel local(hanya bisa diakses didalam fungsi)
+
+fungsi()
+# print(nama_local)  <-- tidak akan bisa diakses
+
+## contoh 1 : penggunaan akses variabel
+
+def sapa_teman():
+    print(f"HALO {nama}")
+
+nama = "udin"
+sapa_teman()
+
+## contoh 2 : merubah variabel global 
+
+angka = 1
+nama = "arip"
+
+def ubah_isi(angka_baru,nama_baru):
+    global angka   # " global " <-- membuat fungsi memiliki akses untuk mengubah nilai global
+    global nama
+    angka = angka_baru
+    nama = nama_baru
+
+print(f"angka = {angka} | nama = {nama}")
+ubah_isi(25,"nazim")
+print(f"angka = {angka} | nama = {nama}")
+
+# contoh 3 :
+angka = 0
+
+for i in range(0,5):
+    angka += i
+    dummy = 5
+
+print(angka)
+print(dummy)
+
+if True:
+    angka_baru = 3
+    dummy = 2
+
+print(angka_baru)
+print(dummy)
+
+# local hanya ada dalam fungsi 
 
 
