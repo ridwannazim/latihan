@@ -497,3 +497,21 @@ from coba_import import * # arti "*" adalah mengimport semua yang boleh atau bis
 # sama dengan from coba_import import tambah, sapa, .... , .... , .... nah akan terlalu banyak makanya menggunakan *
 # tapi ada satu masalah yaitu : ketika  ada dua file lalu kita melakukan hal yang sama seperti itu import *
 # lalu di kedua file tersebut memiliki fungsi atau data yang sama maka akan tumpang tindih dan akan membuat bingung dari mana fungsi atau data tersebut diambil
+
+
+# membuat package
+
+# package (paket) adalah folder yang berisi kumpulan module (modul)
+# cara menggunakannya
+import sains.matematika #atau
+from sains import fisika # atau
+from sains.fisika import gaya
+
+hasil_tambah = sains.matematika.tambah(1,2,3,4,5,4)
+print(f"hasil pertambahan = {hasil_tambah}")
+
+hasil_gaya = fisika.gaya(23,5)
+print(f"hasil perhitungan gaya = {hasil_gaya}")
+
+hasil_gaya = gaya(23,5)
+print(f"hasil perhitungan gaya = {hasil_gaya}")
