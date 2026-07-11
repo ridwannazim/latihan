@@ -461,3 +461,32 @@ print(dummy)
 # local hanya ada dalam fungsi 
 
 
+'''HARI 41'''
+
+# import
+
+#cara melakuakn import
+import coba_import as cb  # mengimmport keseleruhan file coba_import lalu menggunkan cb sebagai nama alias
+from coba_import import tambah, sapa # hanya mengimport fungsi tambah dan sapa dari file coba import
+
+
+
+
+print(cb.data)
+print(cb.nama)
+
+hitung = cb.tambah(12,5)
+print(hitung)
+hitung = cb.tambah(12.5,5)
+print(hitung)
+
+cb.sapa("rido")
+print(tambah(5,6))
+print(sapa("ridwan"))
+
+data = 20
+print(data)
+
+print(cb.data)
+cb.data = 20
+print(cb.data)
