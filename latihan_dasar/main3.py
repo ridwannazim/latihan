@@ -490,3 +490,10 @@ print(data)
 print(cb.data)
 cb.data = 20
 print(cb.data)
+
+# tambahan 
+# dapat juga begini 
+from coba_import import * # arti "*" adalah mengimport semua yang boleh atau bisa di import dari coba_import
+# sama dengan from coba_import import tambah, sapa, .... , .... , .... nah akan terlalu banyak makanya menggunakan *
+# tapi ada satu masalah yaitu : ketika  ada dua file lalu kita melakukan hal yang sama seperti itu import *
+# lalu di kedua file tersebut memiliki fungsi atau data yang sama maka akan tumpang tindih dan akan membuat bingung dari mana fungsi atau data tersebut diambil
